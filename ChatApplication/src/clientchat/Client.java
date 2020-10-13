@@ -13,6 +13,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**Java class used for the client
  *
@@ -59,7 +61,12 @@ public class Client extends Thread{
      * variable that stores the port in which the server listens to the clients
      */
     private int port;
-    
+
+    /**
+     * Attribute for the logger
+     */
+    private static Logger log = LoggerFactory.getLogger(Client.class.getClass());
+
     /**
     * Class Constructor
     * @param window
@@ -87,21 +94,24 @@ public class Client extends Thread{
             socket = new Socket(host,port);
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
-            System.out.println("Successfull connection");
+            log.info("Conexión exitosa");
             this.sendConnectionRequest(ID);
             this.listen();
+
             
             
         }catch(UnknownHostException ex){
             JOptionPane.showMessageDialog(window, "Server unknown, you may not have entered a valid IP\n"
                     + "or the server is not running \n"
                     + "This app will shut down");
+            log.error(ex.getMessage());
             System.exit(0);
-        }catch(IOException ex){
+        }catch(IOException e){
             JOptionPane.showMessageDialog(window, "Input/Output error, you may not have entered a valid IP\n"
                     + "or you entered a invalid port\n"
                     + "The server may not be running\n"
                     + "This app will shut down");
+            log.error(e.getMessage());
             
             System.exit(0);
             
@@ -117,9 +127,11 @@ public class Client extends Thread{
             objectInputStream.close();
             socket.close();
             listening = false;
+            log.info("Ejecutando método disconnect()");
             
         }catch(Exception ex){
-            System.err.println("Error while closing the elements of communication");
+            log.error(ex.getMessage());
+            log.error("Error while closing the elements of communication");
         }//End catch
         
     }//End disconnect()
@@ -142,9 +154,10 @@ public class Client extends Thread{
         
         try{
             objectOutputStream.writeObject(list);
+            log.info("Ejecutando método sendMessage()");
             
         }catch(IOException ex){
-            System.out.println("Writing or reading error when trying to send the message to the server");
+            log.error(ex.getMessage() + "Writing or reading error when trying to send the message to the server" );
         }//End catch
     }//End sendMessage()
     
@@ -169,11 +182,12 @@ public class Client extends Thread{
                 
                 
             }//End while
-            
+            log.info("Ejecutando método listen()");
         }catch(Exception e ){
             JOptionPane.showMessageDialog(window, "The connection with the server has been lost\n"
                     + "This chat will end\n"
                     + "The will shut down");
+            log.error(e.getMessage(),e);
             System.exit(0);
             
         }//End catch
@@ -230,8 +244,9 @@ public class Client extends Thread{
        list.add(ID);
        try{
            objectOutputStream.writeObject(list);
+           log.info("Ejecutando sendConnectionRequest()");
        }catch(IOException ex){
-           System.out.println("Error reading and writing message to the server");
+           log.error(ex.getMessage() + "Error reading and writing message to the server" , ex);
        }//End catch
     }//End sendConnectionRequest()
     
@@ -252,8 +267,9 @@ public class Client extends Thread{
         list.add(ID);
         try{
             objectOutputStream.writeObject(list);
+            log.info("Ejecutando método confirmDisconnection()");
         }catch(IOException ex){
-            System.out.println("Error reading and writing message to the server");
+            log.error(ex.getMessage() + "Error reading and writing message to the server",ex);
         }//End catch
     }//End confirmDisconnection()
     

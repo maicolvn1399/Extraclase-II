@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *Class that handles the GUI of the server, it shows a log of the connections and disconnections 
@@ -23,6 +25,7 @@ import javax.swing.JTextField;
 public class WindowServer extends javax.swing.JFrame {
     private final String DEFAULT_PORT = "10101";
     private final Server server;
+    private static Logger log = LoggerFactory.getLogger(WindowServer.class.getClass());
     
 
     /**

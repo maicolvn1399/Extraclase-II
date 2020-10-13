@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
+
 /**
  *Class that manages the GUI of clients 
  * @author Michael

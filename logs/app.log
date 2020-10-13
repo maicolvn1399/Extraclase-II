@@ -1,0 +1,23 @@
+2020-10-13 11:03:51,568 INFO java.lang.Class [Thread-0] Conexión exitosa
+2020-10-13 11:03:51,585 INFO java.lang.Class [Thread-0] Ejecutando sendConnectionRequest()
+2020-10-13 11:04:02,736 INFO java.lang.Class [Thread-0] Conexión exitosa
+2020-10-13 11:04:02,748 INFO java.lang.Class [Thread-0] Ejecutando sendConnectionRequest()
+2020-10-13 11:04:14,263 INFO java.lang.Class [Thread-0] Conexión exitosa
+2020-10-13 11:04:14,280 INFO java.lang.Class [Thread-0] Ejecutando sendConnectionRequest()
+2020-10-13 11:08:48,706 ERROR java.lang.Class [Thread-0] Ejecutando método run()
+2020-10-13 11:12:06,707 ERROR java.lang.Class [Thread-0] Ejecutando método run()
+2020-10-13 11:12:27,370 INFO java.lang.Class [Thread-0] Conexión exitosa
+2020-10-13 11:12:27,384 INFO java.lang.Class [Thread-0] Ejecutando sendConnectionRequest()
+2020-10-13 11:12:36,304 INFO java.lang.Class [Thread-0] Conexión exitosa
+2020-10-13 11:12:36,332 INFO java.lang.Class [Thread-0] Ejecutando sendConnectionRequest()
+2020-10-13 11:12:44,017 INFO java.lang.Class [Thread-0] Conexión exitosa
+2020-10-13 11:12:44,046 INFO java.lang.Class [Thread-0] Ejecutando sendConnectionRequest()
+2020-10-13 11:12:54,176 ERROR java.lang.Class [Thread-0] Connection resetThe connection with the server has been lost\n"
+                    + "This chat will end\n"
+                    + "The will shut down"
+2020-10-13 11:12:55,227 ERROR java.lang.Class [Thread-0] Connection resetThe connection with the server has been lost\n"
+                    + "This chat will end\n"
+                    + "The will shut down"
+2020-10-13 11:12:56,332 ERROR java.lang.Class [Thread-0] Connection resetThe connection with the server has been lost\n"
+                    + "This chat will end\n"
+                    + "The will shut down"

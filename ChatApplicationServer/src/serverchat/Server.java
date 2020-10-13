@@ -11,6 +11,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * class to handle the connection from the server's side
@@ -44,7 +46,13 @@ public class Server extends Thread{
      * this variable will diferentiate them 
      */
     static int correlative;
-    
+
+    /**
+     * Attribute for logger
+     */
+    private static Logger log = LoggerFactory.getLogger(Server.class.getClass());
+
+
     /**
      * Constructor of the Server 
      * @param port 
@@ -67,6 +75,7 @@ public class Server extends Thread{
         try{
             serverSocket = new ServerSocket(Integer.valueOf(port));
             window.addInitializedServer();
+            log.error("Ejecutando método run()");
             while(true){
                 ClientThread h;
                 Socket socket;
@@ -80,6 +89,7 @@ public class Server extends Thread{
             JOptionPane.showMessageDialog(window, "The server could not start\n"
                     + "you might have entered an invalid port\n"
                     + "This application will close");
+            log.error(ex.getMessage(),ex);
             System.exit(0);
         }//End catch 
     }//End run()

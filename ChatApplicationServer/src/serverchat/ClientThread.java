@@ -12,6 +12,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.LinkedList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *Class that makes threads, these threads listen to what the clients say 
@@ -50,7 +52,13 @@ public class ClientThread extends Thread{
      * Boolean that is true when the thread is listening for new connections, otherwise is false 
      */
     private boolean listening;
-    
+
+    /**
+     * Attribute for the logger
+     */
+    private static Logger log = LoggerFactory.getLogger(ClientThread.class.getClass());
+
+
     /**
      * Constructor of this class
      * @param socket
@@ -62,9 +70,10 @@ public class ClientThread extends Thread{
         try{
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
+            log.info("Ejecutando try del método ClientThread()");
             
         }catch(IOException ex){
-            System.err.println("Error initializing objectOutputStream and the objectInputStream");
+            log.error(ex.getMessage(),ex);
         }//End catch
     }//End constructor 
         
@@ -75,9 +84,10 @@ public class ClientThread extends Thread{
             try{
                 socket.close();
                 listening = false;
+                log.info("Ejecutando try del método disconnect()");
                 
             }catch(IOException ex){
-                System.err.println("Error when closing the communication with the client");
+                log.error(ex.getMessage(),ex);
                 
         }//End catch
     }//End disconnect()
@@ -88,8 +98,9 @@ public class ClientThread extends Thread{
         public void run(){
             try{
                 listen();
+                log.info("Ejecutando try del método run()");
             }catch(Exception ex){
-                System.out.println("Error while trying to call the readLine method of the client");
+                log.error(ex.getMessage(),ex);
             }//End catch
             disconnect();
         }//End run()
@@ -104,9 +115,10 @@ public class ClientThread extends Thread{
                     Object aux=objectInputStream.readObject();
                     if(aux instanceof LinkedList){
                         execute((LinkedList<String>)aux);
+                        log.info("Ejecutando bloque try del método listen()");
                     }//End if 
                 }catch(Exception e){
-                    System.err.println("Error, the object sent by the client could not be read");
+                    log.error(e.getMessage(),e);
                 }//End catch
             }//End while
         }//End listen()
@@ -151,8 +163,10 @@ public class ClientThread extends Thread{
         private void sendMessage(LinkedList<String> list){
             try{
                 objectOutputStream.writeObject(list);
+                log.info("Ejecutando bloque try de sendMessage()");
             }catch(Exception ex){
-                System.err.println("There was an error while sending the message to the client");
+                log.error(ex.getMessage(),ex);
+
             }//End catch
         }//End sendMessage()
         
